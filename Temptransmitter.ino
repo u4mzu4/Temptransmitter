@@ -10,8 +10,8 @@
 #define REFRESHTIME 60000
 #define SERVER_PORT 80
 
-const char* ssid     = "DarpAsusNet_2.4";
-const char* password = "andrew243";
+const char* ssid     = "";
+const char* password = "";
 
 char tempstr[5];
 
