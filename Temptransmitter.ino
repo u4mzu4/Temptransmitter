@@ -57,6 +57,7 @@ void loop() {
   static unsigned long timer;
   int sensorValue;
   float tempC;
+  unsigned long DS18B20timeout;
   //read sensor
 
   server.handleClient();
@@ -64,17 +65,27 @@ void loop() {
   {
     sensor.requestTemperaturesByAddress(sensorDeviceAddress0);
     tempRaw0 = sensor.getTemp(sensorDeviceAddress0);
+    DS18B20timeout = millis();
     while (tempRaw0 == 0x2A80)
     {
       sensor.requestTemperaturesByAddress(sensorDeviceAddress0);
       tempRaw0 = sensor.getTemp(sensorDeviceAddress0);
+      if (millis()-DS18B20timeout > TIMEOUT)
+        {
+        break;
+        }
     }
     sensor.requestTemperaturesByAddress(sensorDeviceAddress1);
     tempRaw1 = sensor.getTemp(sensorDeviceAddress1);
+    DS18B20timeout = millis();
     while (tempRaw1 == 0x2A80)
     {
       sensor.requestTemperaturesByAddress(sensorDeviceAddress1);
       tempRaw1 = sensor.getTemp(sensorDeviceAddress1);
+      if (millis()-DS18B20timeout > TIMEOUT)
+        {
+        break;
+        }
     }
     tempC=min(tempRaw0,tempRaw1)/128.0;
     sensorValue = analogRead(SENSORPIN);
