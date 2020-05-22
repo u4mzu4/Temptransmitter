@@ -57,6 +57,7 @@ void ReadDS18B20()
   }
   tempC = min(tempRaw[0], tempRaw[1]) / 128.0;
   dtostrf(tempC, 5, 1, tempStr);
+  lastRefresh = millis();
 }
 
 void setup()
