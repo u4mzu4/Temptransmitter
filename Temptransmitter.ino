@@ -35,7 +35,6 @@ void handleRoot()
 void ReadDS18B20()
 {
   unsigned short tempRaw[NR_OF_SENSORS];
-  static unsigned long timer;
   float tempC;
   unsigned long DS18B20timeout;
 
